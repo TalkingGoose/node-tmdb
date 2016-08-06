@@ -1,0 +1,1 @@
+{"version":3,"sources":["config/index.es6"],"names":[],"mappings":"AAAA;;;;AAIA;;AAEA,OAAO,OAAP,GAAiB;AACb,eAAa,QAAQ,aAAR;AADA,CAAjB","file":"config/index.js","sourcesContent":["/**\r\n * Created by Paul on 06/08/2016.\r\n */\r\n\r\n'use strict';\r\n\r\nmodule.exports = {\r\n    'Templates': require('./templates')\r\n};\r\n"],"sourceRoot":"/source/"}

@@ -1,0 +1,9 @@
+{
+  "URL": "http://api.themoviedb.org/3/$",
+  "GET": {
+      "method": "GET",
+      "headers": {
+          "Accept": "application/json"
+      }
+  }
+}
