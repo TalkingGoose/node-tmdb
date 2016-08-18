@@ -5,12 +5,11 @@
 'use strict';
 
 const util = require('util');
-const request = require('request');
 const TypeOf = require('TypeOf');
 
-const {Templates} = require('../config');
-const Timed = require('../libs/timed');
 const Season = require('../Seasons/season');
+const request = require('../libs/timed-request');
+const {Templates} = require('../config');
 
 function Show(instance, data) {
     if (!(this instanceof Show)) {
@@ -35,22 +34,20 @@ Object.defineProperties(Show.prototype, {
                 'qs': Object.assign({}, { 'api_key': this.instance.apikey })
             });
 
-            Timed.Enforce(250, (callback) => {
-                request(requestData, (error, response, body) => {
-                    if (error) {
-                        return callback(error);
-                    }
+            request(requestData, (error, response, body) => {
+                if (error) {
+                    return callback(error);
+                }
 
-                    this.data = JSON.parse(body);
-                    let seasons = this.data.seasons;
+                this.data = JSON.parse(body);
+                let seasons = this.data.seasons;
 
-                    if (TypeOf.isArray(seasons)) {
-                        this.data.seasons = seasons.map((data) => new Season(this.instance, this, data));
-                    }
+                if (TypeOf.isArray(seasons)) {
+                    this.data.seasons = seasons.map((data) => new Season(this.instance, this, data));
+                }
 
-                    return callback(null, this);
-                });
-            }, callback);
+                return callback(null, this);
+            });
         }
     },
 

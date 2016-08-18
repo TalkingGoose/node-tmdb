@@ -5,15 +5,16 @@
 'use strict';
 
 var util = require('util');
-var request = require('request');
 var TypeOf = require('TypeOf');
+
+var Movie = require('./movie');
+var request = require('../libs/timed-request');
+var cached = require('../libs/cached');
 
 var _require = require('../config');
 
 var Templates = _require.Templates;
 
-var Timed = require('../libs/timed');
-var Movie = require('./movie');
 
 function Interface(instance, options) {
     if (!(this instanceof Interface)) {
@@ -38,25 +39,40 @@ Object.defineProperties(Interface.prototype, {
                 'qs': Object.assign({}, { 'api_key': this.instance.apikey }, data)
             });
 
-            Timed.Enforce(250, function (callback) {
-                request(requestData, function (error, response, body) {
-                    if (error) {
-                        return callback(error);
-                    }
+            request(requestData, function (error, response, body) {
+                if (error) {
+                    return callback(error);
+                }
 
-                    var jsonData = JSON.parse(body);
-                    var results = jsonData.results;
+                var jsonData = JSON.parse(body);
+                var results = jsonData.results;
 
-                    if (TypeOf.isArray(results)) {
-                        jsonData.results = results.map(function (data) {
-                            return new Movie(data);
-                        });
-                    }
+                if (TypeOf.isArray(results)) {
+                    jsonData.results = results.map(function (data) {
+                        return new Movie(data);
+                    });
+                }
 
-                    return callback(null, jsonData);
-                });
-            }, callback);
+                return callback(null, jsonData);
+            });
         }
+    },
+
+    'genres': {
+        'value': cached(function (callback) {
+            var requestData = Object.assign({}, Templates.GET, {
+                'url': Templates.URL.replace('$', 'genre/movie/list'),
+                'qs': Object.assign({}, { 'api_key': this.instance.apikey })
+            });
+
+            request(requestData, function (error, response, body) {
+                if (error) {
+                    return callback(error);
+                }
+
+                return callback(null, JSON.parse(body));
+            });
+        }, 1000)
     }
 });
 

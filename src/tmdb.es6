@@ -6,10 +6,10 @@
 
 const util = require('util');
 const TypeOf = require('TypeOf');
-const request = require('request');
 
 const Movies = require('./movies/interface');
 const Shows = require('./shows/interface');
+const request = require('./libs/timed-request');
 
 function TMDB(apikey, options) {
     if (!(this instanceof TMDB)) {
@@ -37,7 +37,6 @@ function TMDB(apikey, options) {
 
 util.inherits(TMDB, Object);
 
-Object.defineProperties(TMDB.prototype, {
-});
+Object.defineProperties(TMDB.prototype, { });
 
 module.exports = TMDB;

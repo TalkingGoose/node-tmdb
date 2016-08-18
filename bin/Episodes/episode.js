@@ -5,14 +5,14 @@
 'use strict';
 
 var util = require('util');
-var request = require('request');
 var TypeOf = require('TypeOf');
+
+var request = require('../libs/timed-request');
 
 var _require = require('../config');
 
 var Templates = _require.Templates;
 
-var Timed = require('../libs/timed');
 
 function Episode(instance, parent, data) {
     if (!(this instanceof Episode)) {
@@ -40,17 +40,15 @@ Object.defineProperties(Episode.prototype, {
                 'qs': Object.assign({}, { 'api_key': this.instance.apikey })
             });
 
-            Timed.Enforce(250, function (callback) {
-                request(requestData, function (error, response, body) {
-                    if (error) {
-                        return callback(error);
-                    }
+            request(requestData, function (error, response, body) {
+                if (error) {
+                    return callback(error);
+                }
 
-                    _this.data = JSON.parse(body);
+                _this.data = JSON.parse(body);
 
-                    return callback(null);
-                });
-            }, callback);
+                return callback(null);
+            });
         }
     },
 

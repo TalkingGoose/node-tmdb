@@ -5,15 +5,15 @@
 'use strict';
 
 var util = require('util');
-var request = require('request');
 var TypeOf = require('TypeOf');
+
+var Episode = require('../Episodes/episode');
+var request = require('../libs/timed-request');
 
 var _require = require('../config');
 
 var Templates = _require.Templates;
 
-var Timed = require('../libs/timed');
-var Episode = require('../Episodes/episode');
 
 function Season(instance, parent, data) {
     if (!(this instanceof Season)) {
@@ -41,24 +41,22 @@ Object.defineProperties(Season.prototype, {
                 'qs': Object.assign({}, { 'api_key': this.instance.apikey })
             });
 
-            Timed.Enforce(250, function (callback) {
-                request(requestData, function (error, response, body) {
-                    if (error) {
-                        return callback(error);
-                    }
+            request(requestData, function (error, response, body) {
+                if (error) {
+                    return callback(error);
+                }
 
-                    _this.data = JSON.parse(body);
-                    var episodes = _this.data.episodes;
+                _this.data = JSON.parse(body);
+                var episodes = _this.data.episodes;
 
-                    if (TypeOf.isArray(episodes)) {
-                        _this.data.episodes = episodes.map(function (data) {
-                            return new Episode(_this.instance, _this, data);
-                        });
-                    }
+                if (TypeOf.isArray(episodes)) {
+                    _this.data.episodes = episodes.map(function (data) {
+                        return new Episode(_this.instance, _this, data);
+                    });
+                }
 
-                    return callback(null, _this);
-                });
-            }, callback);
+                return callback(null, _this);
+            });
         }
     },
 

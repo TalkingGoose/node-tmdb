@@ -5,12 +5,12 @@
 'use strict';
 
 const util = require('util');
-const request = require('request');
 const TypeOf = require('TypeOf');
 
-const {Templates} = require('../config');
-const Timed = require('../libs/timed');
 const Movie = require('./movie');
+const request = require('../libs/timed-request');
+const cached = require('../libs/cached');
+const {Templates} = require('../config');
 
 function Interface(instance, options) {
     if (!(this instanceof Interface)) {
@@ -35,23 +35,38 @@ Object.defineProperties(Interface.prototype, {
                 'qs': Object.assign({}, { 'api_key': this.instance.apikey }, data)
             });
 
-            Timed.Enforce(250, (callback) => {
-                request(requestData, (error, response, body) => {
-                    if (error) {
-                        return callback(error);
-                    }
+            request(requestData, (error, response, body) => {
+                if (error) {
+                    return callback(error);
+                }
 
-                    let jsonData = JSON.parse(body);
-                    let results = jsonData.results;
+                let jsonData = JSON.parse(body);
+                let results = jsonData.results;
 
-                    if (TypeOf.isArray(results)) {
-                        jsonData.results = results.map((data) => new Movie(data));
-                    }
+                if (TypeOf.isArray(results)) {
+                    jsonData.results = results.map((data) => new Movie(data));
+                }
 
-                    return callback(null, jsonData);
-                });
-            }, callback);
+                return callback(null, jsonData);
+            });
         }
+    },
+
+    'genres': {
+        'value': cached(function(callback) {
+            let requestData = Object.assign({}, Templates.GET, {
+                'url': Templates.URL.replace('$', 'genre/movie/list'),
+                'qs': Object.assign({}, { 'api_key': this.instance.apikey })
+            });
+
+            request(requestData, (error, response, body) => {
+                if (error) {
+                    return callback(error);
+                }
+
+                return callback(null, JSON.parse(body));
+            });
+        }, 10000)
     }
 });
 

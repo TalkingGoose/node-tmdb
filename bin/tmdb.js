@@ -6,10 +6,10 @@
 
 var util = require('util');
 var TypeOf = require('TypeOf');
-var request = require('request');
 
 var Movies = require('./movies/interface');
 var Shows = require('./shows/interface');
+var request = require('./libs/timed-request');
 
 function TMDB(apikey, options) {
     if (!(this instanceof TMDB)) {
