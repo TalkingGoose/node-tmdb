@@ -5,7 +5,7 @@
 'use strict';
 
 const util = require('util');
-const TypeOf = require('TypeOf');
+const TypeOf = require('typeof');
 
 const Episode = require('../Episodes/episode');
 const request = require('../libs/timed-request');

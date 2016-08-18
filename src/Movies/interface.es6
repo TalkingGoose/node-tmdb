@@ -5,7 +5,7 @@
 'use strict';
 
 const util = require('util');
-const TypeOf = require('TypeOf');
+const TypeOf = require('typeof');
 
 const Movie = require('./movie');
 const request = require('../libs/timed-request');
@@ -67,6 +67,12 @@ Object.defineProperties(Interface.prototype, {
                 return callback(null, JSON.parse(body));
             });
         }, 10000)
+    },
+
+    'from': {
+        'value': function(data) {
+            return new Movie(data);
+        }
     }
 });
 

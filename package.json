@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "Logger": "git://github.com/TalkingGoose/Logger.git#master",
-    "TypeOf": "git://github.com/TalkingGoose/TypeOf.git#master",
+    "logger": "git://github.com/TalkingGoose/Logger.git#master",
+    "typeof": "git://github.com/TalkingGoose/TypeOf.git#master",
     "async": "^2.0.1",
     "request": "^2.74.0"
   },

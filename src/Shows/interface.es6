@@ -5,7 +5,7 @@
 'use strict';
 
 const util = require('util');
-const TypeOf = require('TypeOf');
+const TypeOf = require('typeof');
 
 const Show = require('./show');
 const request = require('../libs/timed-request');
@@ -81,6 +81,12 @@ Object.defineProperties(Interface.prototype, {
                 });
             };
         }())
+    },
+
+    'from': {
+        'value': function(data) {
+            return new Show(data);
+        }
     }
 });
 

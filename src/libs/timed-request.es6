@@ -6,7 +6,7 @@
 
 const util = require('util');
 const request = require('request');
-const TypeOf = require('TypeOf');
+const TypeOf = require('typeof');
 const timeDiff = require('./time-diff');
 
 let REQUEST_QUEUE = [];

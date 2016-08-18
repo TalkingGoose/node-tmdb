@@ -5,7 +5,7 @@
 'use strict';
 
 const util = require('util');
-const TypeOf = require('TypeOf');
+const TypeOf = require('typeof');
 
 const Movies = require('./movies/interface');
 const Shows = require('./shows/interface');

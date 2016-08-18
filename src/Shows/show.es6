@@ -5,7 +5,7 @@
 'use strict';
 
 const util = require('util');
-const TypeOf = require('TypeOf');
+const TypeOf = require('typeof');
 
 const Season = require('../Seasons/season');
 const request = require('../libs/timed-request');
@@ -30,7 +30,7 @@ Object.defineProperties(Show.prototype, {
     'complete': {
         'value': function(callback) {
             let requestData = Object.assign({}, Templates.GET, {
-                'url': Templates.URL.replace('$', `tv/${this.data.id}`),
+                'url': Templates.URL.replace('$', `tv/${this.get('id')}`),
                 'qs': Object.assign({}, { 'api_key': this.instance.apikey })
             });
 

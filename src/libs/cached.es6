@@ -19,7 +19,6 @@ module.exports = function(target, expire) {
         }
 
         if (cache !== null && timeDiff(lastRetrieval) < expire) {
-            logger.debug('[CACHED]');
             callback(...cache);
         }
 
@@ -30,7 +29,6 @@ module.exports = function(target, expire) {
 
             let callback = null;
             while ((callback = queue.shift()) !== undefined) {
-                logger.debug('[QUEUED]');
                 callback(...cache);
             }
         });
