@@ -6,7 +6,7 @@
 
 var util = require('util');
 var request = require('request');
-var TypeOf = require('TypeOf');
+var TypeOf = require('typeof');
 var timeDiff = require('./time-diff');
 
 var REQUEST_QUEUE = [];

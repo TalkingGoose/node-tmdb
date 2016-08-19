@@ -21,7 +21,6 @@ module.exports = function (target, expire) {
         }
 
         if (cache !== null && timeDiff(lastRetrieval) < expire) {
-            logger.debug('[CACHED]');
             callback.apply(undefined, _toConsumableArray(cache));
         }
 
@@ -36,7 +35,6 @@ module.exports = function (target, expire) {
 
             var callback = null;
             while ((callback = queue.shift()) !== undefined) {
-                logger.debug('[QUEUED]');
                 callback.apply(undefined, _toConsumableArray(cache));
             }
         });

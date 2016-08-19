@@ -5,7 +5,7 @@
 'use strict';
 
 var util = require('util');
-var TypeOf = require('TypeOf');
+var TypeOf = require('typeof');
 
 var Movies = require('./movies/interface');
 var Shows = require('./shows/interface');

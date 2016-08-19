@@ -5,7 +5,7 @@
 'use strict';
 
 var util = require('util');
-var TypeOf = require('TypeOf');
+var TypeOf = require('typeof');
 
 var request = require('../libs/timed-request');
 

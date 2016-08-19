@@ -5,7 +5,7 @@
 'use strict';
 
 var util = require('util');
-var TypeOf = require('TypeOf');
+var TypeOf = require('typeof');
 
 var Season = require('../Seasons/season');
 var request = require('../libs/timed-request');
@@ -36,7 +36,7 @@ Object.defineProperties(Show.prototype, {
             var _this = this;
 
             var requestData = Object.assign({}, Templates.GET, {
-                'url': Templates.URL.replace('$', 'tv/' + this.data.id),
+                'url': Templates.URL.replace('$', 'tv/' + this.get('id')),
                 'qs': Object.assign({}, { 'api_key': this.instance.apikey })
             });
 
