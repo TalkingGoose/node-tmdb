@@ -7,7 +7,7 @@
 var util = require('util');
 var TypeOf = require('typeof');
 
-var Season = require('../Seasons/season');
+var Season = require('../seasons/season');
 var request = require('../libs/timed-request');
 
 var _require = require('../config');

@@ -7,7 +7,7 @@
 var util = require('util');
 var TypeOf = require('typeof');
 
-var Episode = require('../Episodes/episode');
+var Episode = require('../episodes/episode');
 var request = require('../libs/timed-request');
 
 var _require = require('../config');
