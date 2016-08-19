@@ -14,13 +14,14 @@ var _require = require('../config');
 var Templates = _require.Templates;
 
 
-function Movie(data) {
+function Movie(instance, data) {
     if (!(this instanceof Movie)) {
         return new Movie(data);
     }
 
     Movie.super_.call(this);
 
+    this.instance = instance;
     this.data = data;
 
     return this;

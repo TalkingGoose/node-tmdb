@@ -34,6 +34,8 @@ util.inherits(Interface, Object);
 Object.defineProperties(Interface.prototype, {
     'search': {
         'value': function value(data, callback) {
+            var _this = this;
+
             var requestData = Object.assign({}, Templates.GET, {
                 'url': Templates.URL.replace('$', 'search/movie'),
                 'qs': Object.assign({}, { 'api_key': this.instance.apikey }, data)
@@ -49,7 +51,7 @@ Object.defineProperties(Interface.prototype, {
 
                 if (TypeOf.isArray(results)) {
                     jsonData.results = results.map(function (data) {
-                        return new Movie(data);
+                        return new Movie(_this.instance, data);
                     });
                 }
 
@@ -77,7 +79,7 @@ Object.defineProperties(Interface.prototype, {
 
     'from': {
         'value': function value(data) {
-            return new Movie(data);
+            return new Movie(this.instance, data);
         }
     }
 });
