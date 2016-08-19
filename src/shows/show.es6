@@ -7,7 +7,7 @@
 const util = require('util');
 const TypeOf = require('typeof');
 
-const Season = require('../Seasons/season');
+const Season = require('../seasons/season');
 const request = require('../libs/timed-request');
 const {Templates} = require('../config');
 

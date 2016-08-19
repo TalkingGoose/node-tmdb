@@ -7,7 +7,7 @@
 const util = require('util');
 const TypeOf = require('typeof');
 
-const Episode = require('../Episodes/episode');
+const Episode = require('../episodes/episode');
 const request = require('../libs/timed-request');
 const {Templates} = require('../config');
 
