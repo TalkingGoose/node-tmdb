@@ -10,13 +10,14 @@ const TypeOf = require('typeof');
 const request = require('../libs/timed-request');
 const {Templates} = require('../config');
 
-function Movie(data) {
+function Movie(instance, data) {
     if (!(this instanceof Movie)) {
         return new Movie(data);
     }
 
     Movie.super_.call(this);
 
+    this.instance = instance;
     this.data = data;
 
     return this;

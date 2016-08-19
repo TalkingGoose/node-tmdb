@@ -44,7 +44,7 @@ Object.defineProperties(Interface.prototype, {
                 let results = jsonData.results;
 
                 if (TypeOf.isArray(results)) {
-                    jsonData.results = results.map((data) => new Movie(data));
+                    jsonData.results = results.map((data) => new Movie(this.instance, data));
                 }
 
                 return callback(null, jsonData);
@@ -71,7 +71,7 @@ Object.defineProperties(Interface.prototype, {
 
     'from': {
         'value': function(data) {
-            return new Movie(data);
+            return new Movie(this.instance, data);
         }
     }
 });
