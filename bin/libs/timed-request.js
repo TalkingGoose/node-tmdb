@@ -88,7 +88,7 @@ Object.defineProperties(TimedRequest, {
 });
 
 // Default duration
-TimedRequest.duration(250);
+TimedRequest.duration(350);
 
 module.exports = TimedRequest;
 //# sourceMappingURL=timed-request.js.map
