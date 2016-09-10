@@ -44,14 +44,16 @@ Object.defineProperties(TimedRequest, {
             // Enforce a minimum time constraint (can take longer)
             TimedRequest.timed(TimedRequest.duration(), function (callback) {
                 request(data.options, callback);
-
+            }, function () {
                 REQUEST_PENDING = false;
                 REQUEST_LAST = process.hrtime();
                 if (REQUEST_QUEUE.length > 0) {
                     REQUEST_PENDING = true;
                     process.nextTick(TimedRequest.consume);
                 }
-            }, data.callback);
+
+                data.callback.apply(data, arguments);
+            });
         }
     },
 
