@@ -68,6 +68,12 @@ Object.defineProperties(Season.prototype, {
 
             return null;
         }
+    },
+
+    'toJSON': {
+        'value': function value() {
+            return this.data;
+        }
     }
 });
 

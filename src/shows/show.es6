@@ -75,6 +75,12 @@ Object.defineProperties(Show.prototype, {
 
             return null;
         }
+    },
+
+    'toJSON': {
+        'value': function() {
+            return this.data;
+        }
     }
 });
 
