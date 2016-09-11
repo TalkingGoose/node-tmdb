@@ -60,6 +60,12 @@ Object.defineProperties(Episode.prototype, {
 
             return null;
         }
+    },
+
+    'toJSON': {
+        'value': function value() {
+            return this.data;
+        }
     }
 });
 
