@@ -93,7 +93,7 @@ Object.defineProperties(Interface.prototype, {
 
     'from': {
         'value': function value(data) {
-            return new Show(data);
+            return new Show(this.instance, data);
         }
     }
 });
