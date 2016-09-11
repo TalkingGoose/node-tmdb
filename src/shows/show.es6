@@ -28,10 +28,26 @@ util.inherits(Show, Object);
 
 Object.defineProperties(Show.prototype, {
     'complete': {
-        'value': function(callback) {
+        'value': function(...args) {
+            let options, callback;
+            switch (args.length) {
+                case 1:
+                    options = {};
+                    callback = args[0];
+                    break;
+
+                case 2:
+                    options = args[0];
+                    callback = args[1];
+                    break;
+
+                default:
+                    return;
+            }
+
             let requestData = Object.assign({}, Templates.GET, {
                 'url': Templates.URL.replace('$', `tv/${this.get('id')}`),
-                'qs': Object.assign({}, { 'api_key': this.instance.apikey })
+                'qs': Object.assign({}, options, { 'api_key': this.instance.apikey })
             });
 
             request(requestData, (error, response, body) => {

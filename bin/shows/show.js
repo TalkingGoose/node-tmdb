@@ -32,12 +32,29 @@ util.inherits(Show, Object);
 
 Object.defineProperties(Show.prototype, {
     'complete': {
-        'value': function value(callback) {
+        'value': function value() {
             var _this = this;
+
+            var options = void 0,
+                callback = void 0;
+            switch (arguments.length) {
+                case 1:
+                    options = {};
+                    callback = arguments.length <= 0 ? undefined : arguments[0];
+                    break;
+
+                case 2:
+                    options = arguments.length <= 0 ? undefined : arguments[0];
+                    callback = arguments.length <= 1 ? undefined : arguments[1];
+                    break;
+
+                default:
+                    return;
+            }
 
             var requestData = Object.assign({}, Templates.GET, {
                 'url': Templates.URL.replace('$', 'tv/' + this.get('id')),
-                'qs': Object.assign({}, { 'api_key': this.instance.apikey })
+                'qs': Object.assign({}, options, { 'api_key': this.instance.apikey })
             });
 
             request(requestData, function (error, response, body) {
