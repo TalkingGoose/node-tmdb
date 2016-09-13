@@ -63,13 +63,6 @@ Object.defineProperties(Show.prototype, {
                 }
 
                 _this.data = JSON.parse(body);
-                var seasons = _this.data.seasons;
-
-                if (TypeOf.isArray(seasons)) {
-                    _this.data.seasons = seasons.map(function (data) {
-                        return new Season(_this.instance, _this, data);
-                    });
-                }
 
                 return callback(null, _this);
             });

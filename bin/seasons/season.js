@@ -47,13 +47,6 @@ Object.defineProperties(Season.prototype, {
                 }
 
                 _this.data = JSON.parse(body);
-                var episodes = _this.data.episodes;
-
-                if (TypeOf.isArray(episodes)) {
-                    _this.data.episodes = episodes.map(function (data) {
-                        return new Episode(_this.instance, _this, data);
-                    });
-                }
 
                 return callback(null, _this);
             });

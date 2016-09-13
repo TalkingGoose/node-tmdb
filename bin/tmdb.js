@@ -13,9 +13,9 @@ var Seasons = require('./seasons/interface');
 
 var request = require('./libs/timed-request');
 
-function TMDB(apikey, options) {
+function TMDB(apikey) {
     if (!(this instanceof TMDB)) {
-        return new TMDB(options);
+        return new TMDB();
     }
 
     TMDB.super_.call(this);
@@ -29,11 +29,10 @@ function TMDB(apikey, options) {
     }
 
     this.apikey = apikey;
-    this.options = options;
 
-    this.movies = new Movies(this, options);
-    this.shows = new Shows(this, options);
-    this.seasons = new Seasons(this, options);
+    this.movies = new Movies(this);
+    this.shows = new Shows(this);
+    this.seasons = new Seasons(this);
 
     return this;
 }

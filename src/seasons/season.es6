@@ -41,11 +41,6 @@ Object.defineProperties(Season.prototype, {
                 }
 
                 this.data = JSON.parse(body);
-                let episodes = this.data.episodes;
-
-                if (TypeOf.isArray(episodes)) {
-                    this.data.episodes = episodes.map((data) => new Episode(this.instance, this, data));
-                }
 
                 return callback(null, this);
             });
