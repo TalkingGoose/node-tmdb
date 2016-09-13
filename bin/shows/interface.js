@@ -15,15 +15,14 @@ var _require = require('../config');
 var Templates = _require.Templates;
 
 
-function Interface(instance, options) {
+function Interface(instance) {
     if (!(this instanceof Interface)) {
-        return new Interface(instance, options);
+        return new Interface(instance);
     }
 
     Interface.super_.call(this);
 
     this.instance = instance;
-    this.options = options;
 
     return this;
 }

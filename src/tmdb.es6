@@ -9,6 +9,8 @@ const TypeOf = require('typeof');
 
 const Movies = require('./movies/interface');
 const Shows = require('./shows/interface');
+const Seasons = require('./seasons/interface');
+
 const request = require('./libs/timed-request');
 
 function TMDB(apikey, options) {
@@ -31,6 +33,7 @@ function TMDB(apikey, options) {
 
     this.movies = new Movies(this, options);
     this.shows = new Shows(this, options);
+    this.seasons = new Seasons(this, options);
 
     return this;
 }
