@@ -17,7 +17,7 @@ var Templates = _require.Templates;
 
 function Season(instance, parent, data) {
     if (!(this instanceof Season)) {
-        return new Season(instance, data);
+        return new Season(instance, parent, data);
     }
 
     Season.super_.call(this);

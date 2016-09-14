@@ -12,7 +12,7 @@ const {Templates} = require('../config');
 
 function Episode(instance, parent, data) {
     if (!(this instanceof Episode)) {
-        return new Episode(instance, data);
+        return new Episode(instance, parent, data);
     }
 
     Episode.super_.call(this);
