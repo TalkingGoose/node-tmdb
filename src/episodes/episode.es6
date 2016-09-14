@@ -64,4 +64,3 @@ Object.defineProperties(Episode.prototype, {
 });
 
 module.exports = Episode;
-
